@@ -20,7 +20,7 @@ public class UserControllerTest {
     private UserController userController = new UserController();
 
     @Test
-    public void returnsUsersTest() {
+    public void returnsUsersTest() throws ValidationException {
         User user1 = new User();
         user1.setEmail("user1@yandex.ru");
         user1.setLogin("user1");
@@ -43,7 +43,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void userValidTest() {
+    void userValidTest() throws ValidationException {
         User user = new User();
         user.setEmail("user1@yandex.ru");
         user.setLogin("user1");
@@ -59,17 +59,17 @@ public class UserControllerTest {
         assertEquals(LocalDate.of(1999, 8, 6), savedUser1.getBirthday());
 
         user.setEmail("12345");
-        assertThrows(RuntimeException.class, () -> userController.createUser(user));
+        assertThrows(ValidationException.class, () -> userController.createUser(user));
 
         user.setEmail("user3.com");
         assertThrows(ValidationException.class, () -> userController.createUser(user));
 
         user.setEmail("user1@yandex.ru");
         user.setLogin("");
-        assertThrows(RuntimeException.class, () -> userController.createUser(user));
+        assertThrows(ValidationException.class, () -> userController.createUser(user));
 
         user.setLogin(null);
-        assertThrows(RuntimeException.class, () -> userController.createUser(user));
+        assertThrows(ValidationException.class, () -> userController.createUser(user));
 
         user.setLogin("user 1");
         assertThrows(ValidationException.class, () -> userController.createUser(user));
@@ -79,7 +79,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void updateUserTest() {
+    void updateUserTest() throws ValidationException {
         User user1 = new User();
         user1.setEmail("user1@yandex.ru");
         user1.setLogin("user1");

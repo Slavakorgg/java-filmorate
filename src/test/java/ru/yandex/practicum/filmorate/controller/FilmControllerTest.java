@@ -18,7 +18,7 @@ public class FilmControllerTest {
     private FilmController filmController;
 
     @Test
-    public void returnFilmsTest() {
+    public void returnFilmsTest() throws ValidationException {
         Film film1 = new Film();
         film1.setName("filmName1");
         film1.setDescription("Descr1");
@@ -41,7 +41,7 @@ public class FilmControllerTest {
     }
 
     @Test
-    void filmsValidTest() {
+    void filmsValidTest() throws ValidationException {
         Film film = new Film();
         film.setName("filmName1");
         film.setDescription("Descr1");
@@ -60,9 +60,7 @@ public class FilmControllerTest {
         assertThrows(ValidationException.class, () -> filmController.createFilm(film));
 
         film.setName("filmName1");
-        film.setDescription("1111111111111111111111111111111111111111111111111111111111111111111" +
-                "111111111111111111111111111111111111111111111111111111111111111111111111111111111" +
-                "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+        film.setDescription("1111111111111111111111111111111111111111111111111111111111111111111" + "111111111111111111111111111111111111111111111111111111111111111111111111111111111" + "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
         assertThrows(ValidationException.class, () -> filmController.createFilm(film));
 
         film.setDescription("Descr1");
@@ -75,7 +73,7 @@ public class FilmControllerTest {
     }
 
     @Test
-    void updateFilmTest() {
+    void updateFilmTest() throws ValidationException {
         Film film = new Film();
         film.setName("filmName1");
         film.setDescription("Descr1");

@@ -1,14 +1,16 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 /**
  * Film.
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Film {
     private Integer id;
