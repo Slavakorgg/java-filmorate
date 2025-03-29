@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 
@@ -17,7 +18,7 @@ public class UserControllerTest {
 
 
     @Autowired
-    private UserController userController = new UserController();
+    private UserController userController;
 
     @Test
     public void returnsUsersTest() throws ValidationException {
@@ -94,6 +95,6 @@ public class UserControllerTest {
         userUpdate.setName(null);
         userUpdate.setBirthday(LocalDate.of(1999, 8, 6));
         userUpdate.setId(8);
-        assertThrows(ValidationException.class, () -> userController.updateUser(userUpdate));
+        assertThrows(DataNotFoundException.class, () -> userController.updateUser(userUpdate));
     }
 }
