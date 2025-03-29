@@ -13,5 +13,5 @@ public interface UserStorage {
 
     User updateUser(User newUser) throws DataNotFoundException;
 
-    User get(int id);
+    User get(int id) throws DataNotFoundException;
 }

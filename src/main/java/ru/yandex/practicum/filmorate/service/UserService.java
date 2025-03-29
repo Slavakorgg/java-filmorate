@@ -33,52 +33,35 @@ public class UserService {
 
     public void addFriend(int id, int friendId) throws DataNotFoundException {
 
-        User user = userStorage.get(id);
-        User friend = userStorage.get(friendId);
-        if (user == null) {
-            throw new DataNotFoundException("Искомый пользователь не найден");
+        User user = get(id);
+        User friend = get(friendId);
 
-        }
-        if (friend == null) {
-            throw new DataNotFoundException("Искомый друг не найден");
-
-        }
         user.getFriendsList().add(friendId);
         friend.getFriendsList().add(id);
     }
 
     public void deleteFriend(Integer id, int friendId) throws DataNotFoundException {
 
-        User user = userStorage.get(id);
-        User friend = userStorage.get(friendId);
-        if (user == null) {
-            throw new DataNotFoundException("Искомый пользователь не найден");
+        User user = get(id);
+        User friend = get(friendId);
 
-        }
-        if (friend == null) {
-            throw new DataNotFoundException("Искомый друг не найден");
-
-        }
         user.getFriendsList().remove(friendId);
         friend.getFriendsList().remove(id);
     }
 
     public List<User> getUserFriends(int id) throws DataNotFoundException {
 
-        User user = userStorage.get(id);
-        if (user == null) {
-            throw new DataNotFoundException("Искомый пользователь не найден");
+        User user = get(id);
 
-        }
         List<User> friends = new ArrayList<>();
         for (Integer friend : user.getFriendsList()) {
-            friends.add(userStorage.get(friend));
+            friends.add(get(friend));
         }
         return friends;
 
     }
 
-    public List<User> getCommonFriends(int id, int otherId) {
+    public List<User> getCommonFriends(int id, int otherId) throws DataNotFoundException {
         List<User> userList = getUserFriends(id);
         List<User> otherUserList = getUserFriends(otherId);
         List<User> commonFriends = new ArrayList<>();
@@ -93,4 +76,8 @@ public class UserService {
     }
 
 
+    public User get(int userId) throws DataNotFoundException {
+
+        return userStorage.get(userId);
+    }
 }

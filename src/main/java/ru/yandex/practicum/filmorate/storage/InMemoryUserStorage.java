@@ -56,7 +56,10 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public User get(int id) {
+    public User get(int id) throws DataNotFoundException {
+        if (users.get(id) == null) {
+            throw new DataNotFoundException("Искомый пользователь не найден");
+        }
         return users.get(id);
     }
 

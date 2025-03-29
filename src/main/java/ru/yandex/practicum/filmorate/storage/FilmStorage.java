@@ -15,5 +15,5 @@ public interface FilmStorage {
 
     Film updateFilm(Film newFilm) throws DataNotFoundException;
 
-    Film get(int filmId);
+    Film get(int filmId) throws DataNotFoundException;
 }

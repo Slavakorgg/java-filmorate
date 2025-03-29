@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/users/{id}/friends/common/{otherId}")
-    public List<User> getCommonFriends(@PathVariable("id") int id, @PathVariable("otherId") int otherId) {
+    public List<User> getCommonFriends(@PathVariable("id") int id, @PathVariable("otherId") int otherId) throws DataNotFoundException {
         return userService.getCommonFriends(id, otherId);
     }
 }

@@ -54,11 +54,14 @@ public class InMemoryFilmStorage implements FilmStorage {
             log.debug("Фильм успешно изменён");
             return newFilm;
         }
-        throw new DataNotFoundException("Некорректный Id");
+        throw new DataNotFoundException("Фильм не найден");
     }
 
     @Override
-    public Film get(int id) {
+    public Film get(int id) throws DataNotFoundException {
+        if (films.get(id) == null) {
+            throw new DataNotFoundException("Фильм не найден");
+        }
         return films.get(id);
     }
 

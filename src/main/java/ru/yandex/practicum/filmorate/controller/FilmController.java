@@ -42,14 +42,13 @@ public class FilmController {
     }
 
     @PutMapping(path = "/films/{id}/like/{userId}")
-    public void addLike(@PathVariable("id") int id, @PathVariable("userId") int userId) {
+    public void addLike(@PathVariable("id") int id, @PathVariable("userId") int userId) throws DataNotFoundException {
 
         filmService.addLike(id, userId);
     }
 
     @DeleteMapping(path = "/films/{id}/like/{userId}")
-    public void deleteLike(@PathVariable("id") int id, @PathVariable("userId") int userId) {
-        log.info("delete like: {}", id);
+    public void deleteLike(@PathVariable("id") int id, @PathVariable("userId") int userId) throws DataNotFoundException {
         filmService.deleteLike(id, userId);
     }
 

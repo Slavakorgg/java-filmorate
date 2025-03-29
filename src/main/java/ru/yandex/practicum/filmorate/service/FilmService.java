@@ -8,7 +8,6 @@ import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
-import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 public class FilmService {
 
     private final FilmStorage filmStorage;
-    private final UserStorage userStorage;
+    private final UserService userService;
 
     public Collection<Film> getFilms() {
         return filmStorage.getFilms();
@@ -37,22 +36,18 @@ public class FilmService {
         return filmStorage.updateFilm(newFilm);
     }
 
-    public void addLike(int id, int userId) {
-        Film film = filmStorage.get(id);
-        User user = userStorage.get(userId);
-        if (film == null || user == null) {
-            throw new DataNotFoundException("Некорректный айди фильма или пользователя");
-        }
+    public void addLike(int id, int userId) throws DataNotFoundException {
+        Film film = get(id);
+        User user = userService.get(userId);
+
         film.getLikes().add(userId);
         log.info("add like: {}", film);
     }
 
-    public void deleteLike(int id, int userId) {
-        Film film = filmStorage.get(id);
-        User user = userStorage.get(userId);
-        if (film == null || user == null) {
-            throw new DataNotFoundException("Некорректный айди фильма или пользователя");
-        }
+    public void deleteLike(int id, int userId) throws DataNotFoundException {
+        Film film = get(id);
+        User user = userService.get(userId);
+
         film.getLikes().remove(userId);
         log.info("delete like: {}", film);
     }
@@ -69,5 +64,10 @@ public class FilmService {
         public int compare(Film o1, Film o2) {
             return o1.getLikes().size() - o2.getLikes().size();
         }
+
     };
+
+    public Film get(int filmId) throws DataNotFoundException {
+        return filmStorage.get(filmId);
+    }
 }
