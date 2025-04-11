@@ -5,12 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Film.
- */
+
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -20,7 +19,9 @@ public class Film {
     private String description;
     private LocalDate releaseDate;
     private Long duration;
+    private Mpa mpa;
     private Set<Integer> likes = new HashSet<>();
+    private Collection<Genre> genres;
 
 
 }
