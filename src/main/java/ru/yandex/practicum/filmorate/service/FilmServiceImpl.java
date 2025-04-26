@@ -23,9 +23,6 @@ public class FilmServiceImpl implements FilmService {
 
     private final FilmStorage filmStorage;
     private final JdbcFilmRepository jdbcFilmRepository;
-    private final JdbcGenreRepository jdbcGenreRepository;
-    private final JdbcMpaRepository jdbcMpaRepository;
-    private final UserServiceImpl userService;
 
     @Override
     public Collection<Film> getFilms() {
@@ -57,7 +54,7 @@ public class FilmServiceImpl implements FilmService {
         }
         if (film.getGenres() != null) {
             for (Genre genre : film.getGenres()) {
-                  if (genre.getId() > 6 ) {
+                if (genre.getId() > 6) {
                     throw new DataNotFoundException("Некорректный жанр");
                 }
             }
