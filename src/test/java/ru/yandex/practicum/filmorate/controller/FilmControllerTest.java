@@ -1,17 +1,8 @@
 package ru.yandex.practicum.filmorate.controller;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
-import ru.yandex.practicum.filmorate.model.Film;
 
-import java.time.LocalDate;
-import java.util.Collection;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class FilmControllerTest {
