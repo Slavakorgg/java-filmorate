@@ -10,10 +10,7 @@ import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.repository.mappers.FilmRowMapper;
 import ru.yandex.practicum.filmorate.repository.mappers.GenreRowMapper;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -87,6 +84,7 @@ public class JdbcFilmRepository implements FilmRepository {
         final String query = "SELECT f.*, m.MPA_NAME FROM FILMS f JOIN MPA m ON f.MPA_ID = m.MPA_ID";
         Collection<Film> films = jdbc.query(query, mapper);
 
+
         for (Film film : films) {
 
             getGenre(film);
@@ -119,6 +117,7 @@ public class JdbcFilmRepository implements FilmRepository {
     @Override
     public void getGenre(Film film) {
         MapSqlParameterSource params = new MapSqlParameterSource();
+
         params.addValue("film_id", film.getId());
 
         Collection<Genre> genres = jdbc.query("SELECT g.GENRE_ID AS id ,g.GENRE_NAME AS name FROM FILM_GENRES fg JOIN GENRES g ON fg.GENRE_ID = g.GENRE_ID WHERE fg.FILM_ID = :film_id", params, genreRowMapper);

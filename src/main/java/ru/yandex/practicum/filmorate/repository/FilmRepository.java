@@ -15,6 +15,7 @@ public interface FilmRepository {
 
     void setGenre(Film film);
 
+
     void getGenre(Film film);
 
     void addLike(int filmId, int userId);

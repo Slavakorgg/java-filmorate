@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.model.Mpa;
-import ru.yandex.practicum.filmorate.service.MpaServiceImpl;
+import ru.yandex.practicum.filmorate.service.MpaService;
 
 import java.util.Collection;
 
@@ -18,7 +18,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class MpaController {
 
-    private final MpaServiceImpl mpaService;
+    private final MpaService mpaService;
 
     @GetMapping(path = "/mpa/{id}")
     public Mpa getMpaById(@PathVariable("id") int id) throws DataNotFoundException {

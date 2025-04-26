@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.model.Genre;
-import ru.yandex.practicum.filmorate.service.GenreServiceImpl;
+import ru.yandex.practicum.filmorate.service.GenreService;
 
 import java.util.Collection;
 
@@ -14,7 +14,7 @@ import java.util.Collection;
 @Slf4j
 @RequiredArgsConstructor
 public class GenreController {
-    private final GenreServiceImpl genreService;
+    private final GenreService genreService;
 
     @GetMapping(path = "/genres/{id}")
     public Genre getGenreById(@PathVariable("id") int id) throws DataNotFoundException {

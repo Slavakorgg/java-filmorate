@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.service.FilmServiceImpl;
+import ru.yandex.practicum.filmorate.service.FilmService;
 
 
 import java.util.Collection;
@@ -21,7 +21,7 @@ import java.util.Collection;
 public class FilmController {
 
     private static final Logger log = LoggerFactory.getLogger(FilmController.class);
-    private final FilmServiceImpl filmService;
+    private final FilmService filmService;
 
     @GetMapping(path = "/films")
     public Collection<Film> getFilms() {
