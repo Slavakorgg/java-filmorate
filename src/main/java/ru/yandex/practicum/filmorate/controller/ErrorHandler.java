@@ -35,7 +35,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse EmptyData(final EmptyResultDataAccessException e) {
+    public ErrorResponse emptyData(final EmptyResultDataAccessException e) {
         log.info("404 {}", e.getMessage());
         return new ErrorResponse(e.getMessage());
 
