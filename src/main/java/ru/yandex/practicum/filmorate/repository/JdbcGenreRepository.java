@@ -35,6 +35,6 @@ public class JdbcGenreRepository implements GenreRepository {
     public boolean genreExist(int id) {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("genre_id", id);
-        return Boolean.TRUE.equals(jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM FILM_GENRES WHERE genre_id =:genre_id)", params, boolean.class));
+        return Boolean.TRUE.equals(jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM GENRES WHERE genre_id =:genre_id)", params, boolean.class));
     }
 }
