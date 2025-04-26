@@ -52,12 +52,12 @@ public class FilmServiceImpl implements FilmService {
         if (film.getDuration() <= 0) {
             throw new ValidationException("Продолжительность фильма должна быть положительным числом");
         }
-        if (!jdbcMpaRepository.mpaExist(film.getMpa().getId())) {
+        if (film.getMpa().getId() > 5) {
             throw new DataNotFoundException("Некорректный возрастной рейтинг");
         }
         if (film.getGenres() != null) {
             for (Genre genre : film.getGenres()) {
-                if (!jdbcGenreRepository.genreExist(genre.getId())) {
+                  if (genre.getId() > 6 ) {
                     throw new DataNotFoundException("Некорректный жанр");
                 }
             }

@@ -15,7 +15,7 @@ public class MpaServiceImpl implements MpaService {
 
     @Override
     public Mpa getById(int id) throws DataNotFoundException {
-        if (!jdbcMpaRepository.mpaExist(id)) {
+        if (id > 5) {
             throw new DataNotFoundException("Некорректный id");
         }
         return jdbcMpaRepository.getById(id);
