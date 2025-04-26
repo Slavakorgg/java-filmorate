@@ -8,4 +8,6 @@ public interface MpaRepository {
     Mpa getById(int id);
 
     Collection<Mpa> getAll();
+
+    boolean mpaExist(int id);
 }

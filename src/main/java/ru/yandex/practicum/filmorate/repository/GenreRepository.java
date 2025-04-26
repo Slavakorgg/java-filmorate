@@ -9,4 +9,5 @@ public interface GenreRepository {
 
     Collection<Genre> getAll();
 
+    boolean genreExist(int id);
 }

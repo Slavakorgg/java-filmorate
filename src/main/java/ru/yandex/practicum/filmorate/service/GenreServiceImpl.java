@@ -15,7 +15,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public Genre getGenreById(int id) throws DataNotFoundException {
-        if (id > jdbcGenreRepository.getAll().size()) {
+        if (!jdbcGenreRepository.genreExist(id)) {
             throw new DataNotFoundException("Некорректный id");
         }
         return jdbcGenreRepository.getById(id);

@@ -30,4 +30,11 @@ public class JdbcGenreRepository implements GenreRepository {
         final String query = "select * FROM GENRES ORDER BY GENRE_ID ";
         return jdbc.query(query, mapper);
     }
+
+    @Override
+    public boolean genreExist(int id) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("genre_id", id);
+        return jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM FILM_GENRES WHERE genre_id =:genre_id)", params, boolean.class);
+    }
 }

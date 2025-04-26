@@ -8,6 +8,8 @@ import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.repository.JdbcFilmRepository;
+import ru.yandex.practicum.filmorate.repository.JdbcGenreRepository;
+import ru.yandex.practicum.filmorate.repository.JdbcMpaRepository;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.time.LocalDate;
@@ -21,6 +23,8 @@ public class FilmServiceImpl implements FilmService {
 
     private final FilmStorage filmStorage;
     private final JdbcFilmRepository jdbcFilmRepository;
+    private final JdbcGenreRepository jdbcGenreRepository;
+    private final JdbcMpaRepository jdbcMpaRepository;
     private final UserServiceImpl userService;
 
     @Override
@@ -48,12 +52,12 @@ public class FilmServiceImpl implements FilmService {
         if (film.getDuration() <= 0) {
             throw new ValidationException("Продолжительность фильма должна быть положительным числом");
         }
-        if (film.getMpa().getId() > 6 || film.getMpa().getId() < 0) {
+        if (!jdbcMpaRepository.mpaExist(film.getMpa().getId())) {
             throw new DataNotFoundException("Некорректный возрастной рейтинг");
         }
         if (film.getGenres() != null) {
             for (Genre genre : film.getGenres()) {
-                if (genre.getId() > 6) {
+                if (!jdbcGenreRepository.genreExist(genre.getId())) {
                     throw new DataNotFoundException("Некорректный жанр");
                 }
             }
