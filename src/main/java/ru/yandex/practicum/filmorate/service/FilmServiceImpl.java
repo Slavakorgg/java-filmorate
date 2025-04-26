@@ -8,8 +8,6 @@ import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.repository.JdbcFilmRepository;
-import ru.yandex.practicum.filmorate.repository.JdbcGenreRepository;
-import ru.yandex.practicum.filmorate.repository.JdbcMpaRepository;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.time.LocalDate;
