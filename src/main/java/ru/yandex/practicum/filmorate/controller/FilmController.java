@@ -2,17 +2,17 @@ package ru.yandex.practicum.filmorate.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.service.FilmService;
+import ru.yandex.practicum.filmorate.service.FilmServiceImpl;
 
 
 import java.util.Collection;
-import java.util.List;
 
 
 @RestController
@@ -21,16 +21,21 @@ import java.util.List;
 public class FilmController {
 
     private static final Logger log = LoggerFactory.getLogger(FilmController.class);
-    private final FilmService filmService;
+    private final FilmServiceImpl filmService;
 
     @GetMapping(path = "/films")
     public Collection<Film> getFilms() {
         return filmService.getFilms();
     }
 
+    @GetMapping(path = "/films/{id}")
+    public Film getFilmById(@PathVariable("id") int id) {
+        return filmService.getFilmById(id);
+    }
+
 
     @PostMapping(path = "/films")
-    public Film createFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film createFilm(@Valid @RequestBody Film film) throws ValidationException, DataNotFoundException {
         return filmService.createFilm(film);
 
     }
@@ -53,7 +58,7 @@ public class FilmController {
     }
 
     @GetMapping(path = "/films/popular")
-    public List<Film> getPopularFilms(@RequestParam(defaultValue = "10") int count) {
+    public Collection<Film> getPopularFilms(@RequestParam(defaultValue = "10") int count) {
         return filmService.getPopularFilms(count);
 
     }

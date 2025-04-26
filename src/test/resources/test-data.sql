@@ -1,0 +1,1 @@
+INSERT INTO USERS (LOGIN, EMAIL, USER_NAME, BIRTHDAY) VALUES('userLogin', 'email@email.com', 'user', '2000-3-22');
