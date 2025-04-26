@@ -32,6 +32,6 @@ public class JdbcMpaRepository implements MpaRepository {
     public boolean mpaExist(int id) {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("mpa_id", id);
-        return jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM MPA WHERE mpa_id =:mpa_id)", params, boolean.class);
+        return Boolean.TRUE.equals(jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM MPA WHERE mpa_id =:mpa_id)", params, boolean.class));
     }
 }
