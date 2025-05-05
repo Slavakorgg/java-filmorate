@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.model.ErrorResponse;
@@ -32,5 +33,12 @@ public class ErrorHandler {
 
     }
 
-}
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse emptyData(final EmptyResultDataAccessException e) {
+        log.info("404 {}", e.getMessage());
+        return new ErrorResponse(e.getMessage());
 
+    }
+
+}

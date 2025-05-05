@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,6 @@ import ru.yandex.practicum.filmorate.service.FilmService;
 
 
 import java.util.Collection;
-import java.util.List;
 
 
 @RestController
@@ -28,9 +28,14 @@ public class FilmController {
         return filmService.getFilms();
     }
 
+    @GetMapping(path = "/films/{id}")
+    public Film getFilmById(@PathVariable("id") int id) {
+        return filmService.getFilmById(id);
+    }
+
 
     @PostMapping(path = "/films")
-    public Film createFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film createFilm(@Valid @RequestBody Film film) throws ValidationException, DataNotFoundException {
         return filmService.createFilm(film);
 
     }
@@ -53,7 +58,7 @@ public class FilmController {
     }
 
     @GetMapping(path = "/films/popular")
-    public List<Film> getPopularFilms(@RequestParam(defaultValue = "10") int count) {
+    public Collection<Film> getPopularFilms(@RequestParam(defaultValue = "10") int count) {
         return filmService.getPopularFilms(count);
 
     }
